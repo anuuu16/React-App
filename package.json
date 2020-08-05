@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@analytics/ownstats": "^0.1.1",
     "@babel/core": "7.9.0",
     "@reduxjs/toolkit": "^1.4.0",
     "@svgr/webpack": "4.3.3",
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
+    "analytics": "^0.5.5",
     "babel-eslint": "10.1.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.1.0",
@@ -66,6 +68,7 @@
     "terser-webpack-plugin": "2.3.5",
     "ts-pnp": "1.1.6",
     "url-loader": "2.3.0",
+    "use-analytics": "0.0.3",
     "webpack": "4.42.0",
     "webpack-dev-server": "3.10.3",
     "webpack-manifest-plugin": "2.2.0",

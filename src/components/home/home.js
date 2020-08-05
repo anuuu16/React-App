@@ -5,6 +5,6 @@ const Home = (state) => {
   return <div>HOME</div>;
 };
 
-const mapStateToProps = (state) => ({ state });
+const mapStateToProps = ({ user }) => ({ user });
 
 export default connect(mapStateToProps, null)(Home);

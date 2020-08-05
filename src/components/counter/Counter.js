@@ -1,34 +1,52 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   decrement,
   increment,
   incrementByAmount,
   incrementAsync,
   selectCount,
-} from '../../app-store/slices/counterSlice';
-import styles from './Counter.module.css';
+} from "../../app-store/slices/counterSlice";
+import styles from "./Counter.module.css";
 import { FormattedMessage } from "react-intl";
-
+import { useAnalytics } from "use-analytics";
+import { analytics } from "../../analytics/analyticsService";
 export function Counter() {
+  const { track, page, identify } = useAnalytics();
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
+  const [incrementAmount, setIncrementAmount] = useState("2");
   const [name, setName] = useState("");
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setName(e.target.value);
+  };
+
+  const trigger = () => {
+    debugger;
+    page();
+
+    /* Identify users */
+    identify("userid-123", {
+      favoriteColor: "blue",
+      membershipLevel: "pro",
+    });
+
+    /* Track events */
+    track("buttonClicked", {
+      value: 100,
+    });
   };
   return (
     <div>
-      <input placeholder="Enter name" onChange={handleChange} />
-        <p>
-          <FormattedMessage id="greeting" values={{ name }} />
-          <br />
-          <FormattedMessage id="time" values={{ t: Date.now() }} />
-          <br />
-          <FormattedMessage id="date" values={{ d: Date.now() }} />
-        </p>
+      <input placeholder="Enter name" onChange={() => trigger()} />
+      <p>
+        <FormattedMessage id="greeting" values={{ name }} />
+        <br />
+        <FormattedMessage id="time" values={{ t: Date.now() }} />
+        <br />
+        <FormattedMessage id="date" values={{ d: Date.now() }} />
+      </p>
       <div className={styles.row}>
         <button
           className={styles.button}
@@ -51,7 +69,7 @@ export function Counter() {
           className={styles.textbox}
           aria-label="Set increment amount"
           value={incrementAmount}
-          onChange={e => setIncrementAmount(e.target.value)}
+          onChange={(e) => setIncrementAmount(e.target.value)}
         />
         <button
           className={styles.button}
